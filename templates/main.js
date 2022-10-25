@@ -1,3 +1,0 @@
-test(){
-  window.alert("working");
-}
