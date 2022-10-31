@@ -119,18 +119,19 @@ class FingerPrint:
                                  ctypes.byref(reject_detail))   
         if ret & 0xffffffff != 0x0:
             print(f"login failed")
-            return False
+            return None
             # print(hex(ret & 0xffffffff))
             #raise Exception("Identify Error")
         else:
-            print(f"login sucess")      
+            print(f"login sucess")    
+            result =   self.identity.Type
             # print(f"Unit ID\t:{hex(self.unit_id.value)}")
             # print(f"Sub Factor\t:{hex(self.subfactor.value)}")
             # print(f"Identity Type\t: {self.identity.Type}")
             # print(f"Identity AccountSid Data\t: {list(self.identity.Value.AccountSid.Data)[0:self.identity.Value.AccountSid.Size]}")
             # print(f"Identity AccountSid Size\t: {self.identity.Value.AccountSid.Size}")
             # print(f"Rejected Details:\t{hex(reject_detail.value)}")
-            return True
+            return result
 
     def verify(self):
         match = ctypes.c_bool(0)
@@ -233,15 +234,15 @@ class FingerPrint:
         self.identity.Value.AccountSid.Size = GetLengthSid(token_user.User.Sid)
 
 
-if __name__ == '__main__':
-    myFP = FingerPrint()
-    try:
-        myFP.open()
-         #myFP.identify()
-        print("Please touch the fingerprint sensor")
-        if myFP.identify():
-            print("Hello! Master")
-        else:
-            print("Sorry! Man")
-    finally:
-        myFP.close()
+# if __name__ == '__main__':
+#     myFP = FingerPrint()
+#     try:
+#         myFP.open()
+#          #myFP.identify()
+#         print("Please touch the fingerprint sensor")
+#         if myFP.identify():
+#             print("Hello! Master")
+#         else:
+#             print("Sorry! Man")
+#     finally:
+#         myFP.close()

@@ -20,16 +20,32 @@ def face_login():
 #指紋認証のルート
 @app.route('/yubi')
 def finger_login():
-      myFP = FingerPrint()
+    myFP = FingerPrint()
     try:
         myFP.open()
-        print("<p>Please touch the fingerprint sensor</p>")
+         #myFP.identify()
+        print("Please touch the fingerprint sensor")
         if myFP.identify():
             print("Hello! Master")
         else:
             print("Sorry! Man")
     finally:
         myFP.close()
+
+
+
+    # myFP = FingerPrint()
+    # try:
+    #     myFP.open()
+    #     print("<p>Please touch the fingerprint sensor</p>")
+    #     userfinger = myFP.identify()
+    #     print("<p>processing</p>")
+    #     return userfinger
+    #     #check wich ID it is and log in
+    # #     if userfing:
+    # #     else:
+    # finally:
+    #     myFP.close()
 
 
 
