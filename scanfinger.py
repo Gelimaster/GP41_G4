@@ -4,7 +4,6 @@
 # @Author   :   Luspock
 # @File     :   fingerprint.py
 
-
 import ctypes
 from ctypes import wintypes
 
@@ -118,20 +117,20 @@ class FingerPrint:
                                  ctypes.byref(self.subfactor),
                                  ctypes.byref(reject_detail))   
         if ret & 0xffffffff != 0x0:
-            print(f"login failed")
-            return None
+            # print(f"login failed")
+            return False
             # print(hex(ret & 0xffffffff))
             #raise Exception("Identify Error")
         else:
-            print(f"login sucess")    
-            result =   self.identity.Type
+            # print(f"login sucess")      
             # print(f"Unit ID\t:{hex(self.unit_id.value)}")
             # print(f"Sub Factor\t:{hex(self.subfactor.value)}")
             # print(f"Identity Type\t: {self.identity.Type}")
             # print(f"Identity AccountSid Data\t: {list(self.identity.Value.AccountSid.Data)[0:self.identity.Value.AccountSid.Size]}")
             # print(f"Identity AccountSid Size\t: {self.identity.Value.AccountSid.Size}")
             # print(f"Rejected Details:\t{hex(reject_detail.value)}")
-            return result
+            x =list(self.identity.Value.AccountSid.Data)[0:self.identity.Value.AccountSid.Size]
+            return x
 
     def verify(self):
         match = ctypes.c_bool(0)
@@ -239,10 +238,11 @@ class FingerPrint:
 #     try:
 #         myFP.open()
 #          #myFP.identify()
-#         print("Please touch the fingerprint sensor")
-#         if myFP.identify():
-#             print("Hello! Master")
-#         else:
-#             print("Sorry! Man")
+#         m= myFP.identify()
+#         print(m)
+#         # if myFP.identify():
+#         #     print("Hello! Master")
+#         # else:
+#         #     print("Sorry! Man")
 #     finally:
 #         myFP.close()
