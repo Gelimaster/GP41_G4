@@ -12,10 +12,13 @@
 
        <button  >face login</button>
        <a href="{{ url_for('finger_login')}}">finger login</a>
+       <button id="button3" onclick="finger_post()" type="button" name="button" >finger login post</button>
       
        <button id="button2" onclick="close()" type="button" name="button">close</button>
     </div>
 
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
   <script type="text/javascript">
     function test(){
@@ -25,6 +28,23 @@
       window.alert("click")
       loginbox.style.display="none";
     }
+    function finger_post(){
+      $.ajax({
+              url: "scanfinger.py",
+             context: document.body
+            }).done(function() {
+             alert('finished python script');;
+            });
+
+
+      // const xhr = new XMLHttpRequest();
+
+      // xhr.open("POST","localhost:8000/yubi");
+      // xhr.setRequestHeader("Content-type" , "application/x-www-form-urlencoded");
+      // xhr.send("name=domenic%message=how its going");
+      
+    }
+
 
   // const button = document.getElementById('yubi');
 
