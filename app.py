@@ -17,9 +17,11 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+def index():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
+   
+
     return render_template("index.html")
 
 # 顔認証のルート
@@ -32,7 +34,7 @@ def face_login():
 
 
 #指紋認証のルート
-@app.route('/yubi')
+@app.route('/yubi',methods=['POST','GET'])
 def finger_login():
     sha256 = hashlib.sha256()
     myFP = FingerPrint()

@@ -7,10 +7,37 @@
   <body>
     <h1>testing</h1>
     <button id="button1" onclick="test()" type="button" name="button">press me</button>
+    <div id="loginbox" style="display:none  ;">
+       <p>login</p>
+
+       <button  >face login</button>
+       <a href="{{ url_for('finger_login')}}">finger login</a>
+      
+       <button id="button2" onclick="close()" type="button" name="button">close</button>
+    </div>
+
+
   <script type="text/javascript">
     function test(){
-        window.alert("working");
+      loginbox.style.display="block";
     }
+    function close(){
+      window.alert("click")
+      loginbox.style.display="none";
+    }
+
+  // const button = document.getElementById('yubi');
+
+  // button.addEventListener('click', function () {
+  //   fetch('https://localhost:8000/yubi')
+  //       .then(function (result) {
+  //           console.log(result);
+  //       })
+  //       .catch(function (err) {
+  //           console.error(err);
+  //     });
+  // });
+
 
   </script>
   </body>
