@@ -5,6 +5,23 @@ import face_recognition
 import io
 from PIL import ImageFont, ImageDraw, Image
 import glob
+import mysql.connector
+
+def main():
+    connection = mysql.connector.connect(
+        host='localhost', # 接続先
+        port='3306',
+        user='root', # mysqlのuser
+        password='', # mysqlのpassword
+        database='hoge', 
+        use_pure=True,
+    )
+
+    # コネクションが切れたときに再接続してくれるように設定
+    connection.ping(reconnect=True)
+    
+    # 接続できているかの確認
+    print(connection.is_connected())
 
 
 face_locations = []
@@ -31,7 +48,7 @@ cv2.imwrite(image_file,img)
 # 顔の位置情報を検索
 face_locations = face_recognition.face_locations(img)
 if face_locations:
-    print("画像に顔がありまsu。")
+    print("画像に顔があります。")
 else:
     print("画像に顔がありません。")
 
@@ -42,5 +59,18 @@ else:
 # cv2.imshow('window title', img)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
+
+
+
+# for face_encoding in face_encodings:
+#     # 顔画像が登録画像と一致しているか検証
+#     matches = face_recognition.compare_faces(known_face_encodings, face_encoding, threshold)
+#     name = "Unknown"
+
+#     # 顔画像と最も近い登録画像を候補とする
+#     face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
+#     best_match_index = np.argmin(face_distances)
+#     if matches[best_match_index]:
+#         name = known_face_names[best_match_index]
 
 print("hello")
