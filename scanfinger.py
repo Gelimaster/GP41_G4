@@ -6,6 +6,7 @@
 
 import ctypes
 from ctypes import wintypes
+import hashlib
 
 
 SECURITY_MAX_SID_SIZE = 68
@@ -233,16 +234,15 @@ class FingerPrint:
         self.identity.Value.AccountSid.Size = GetLengthSid(token_user.User.Sid)
 
 
-# if __name__ == '__main__':
-#     myFP = FingerPrint()
-#     try:
-#         myFP.open()
-#          #myFP.identify()
-#         m= myFP.identify()
-#         print(m)
-#         # if myFP.identify():
-#         #     print("Hello! Master")
-#         # else:
-#         #     print("Sorry! Man")
-#     finally:
-#         myFP.close()
+if __name__ == '__main__':
+    sha256 = hashlib.sha256()
+    myFP = FingerPrint()
+    try:
+        myFP.open()
+         #myFP.identify()
+        fingerdata= myFP.identify()
+        finger=str(fingerdata)
+        sha256.update(finger.encode("utf-8"))
+        print(sha256.hexdigest())         
+    finally:
+        myFP.close()

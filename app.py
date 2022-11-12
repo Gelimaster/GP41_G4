@@ -1,5 +1,6 @@
 from flask import Flask, request ,render_template
 from scanfinger import *
+from opencmd import *
 import json
 import hashlib
 app = Flask(__name__)
@@ -24,6 +25,13 @@ def index():
 
     return render_template("index.html")
 
+@app.route('/register',methods=["POST","GET"])
+def register():
+    name = request.args.get('message')
+    return name
+    if request.method == "POST":
+        return render_template("index1.html")
+    
 # 顔認証のルート
 @app.route('/kao')
 def face_login():
@@ -31,26 +39,18 @@ def face_login():
     #text = request.args.get('text', '')
     return render_template("index.html")
 
+@app.route('/cmd')
+def cmdopen():
+   return test()
+        
+
 
 
 #指紋認証のルート
 @app.route('/yubi',methods=['POST','GET'])
 def finger_login():
-    sha256 = hashlib.sha256()
-    myFP = FingerPrint()
-    try:
-        myFP.open()
-         #myFP.identify()
-        fingerdata= myFP.identify()
-        y=str(fingerdata)
-        sha256.update(y.encode("utf-8"))
-        data =[{'fingerprint':sha256.hexdigest()}]
-        jsondata = json.dumps(data)
-        return jsondata
-        
-    finally:
-        myFP.close()
-
+    message = request.args.get('message')
+    return message  
 
 
 
@@ -71,7 +71,7 @@ def finger_login():
 
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    return render_template("index.html")
+    
 
 # 外部に公開できるようにポート開放
 if __name__ == '__main__':

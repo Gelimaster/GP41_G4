@@ -12,7 +12,7 @@
 
        <button  >face login</button>
        <a href="{{ url_for('finger_login')}}">finger login</a>
-       <button id="button3" onclick="finger_post()" type="button" name="button" >finger login post</button>
+       <button id="button3" onclick="do_ajax()" type="button" name="button" >finger login post</button>
       
        <button id="button2" onclick="close()" type="button" name="button">close</button>
     </div>
@@ -28,36 +28,50 @@
       window.alert("click")
       loginbox.style.display="none";
     }
-    function finger_post(){
-      $.ajax({
-              url: "scanfinger.py",
-             context: document.body
+    // function finger_post(){
+    //   finger = $.ajax({
+    //           url: "scanfinger.py",
+    //          context: document.body
+    //         }).done(function() {
+    //           return context
+    //          alert('finished python script');
+    //         });
+
+
+    //   const xhr = new XMLHttpRequest();
+    //   let send;
+
+    //   xhr.open("POST","http://127.0.0.1:8000/yubi",true);
+    //   console.log("open")
+    //   xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    //   console.log("requestheader  :"+xhr)
+    //   xhr.onreadystatechange = () =>{
+    //     if(xhr.readyState==4 && xhr.status==200){
+    //       send = "hello im working";
+    //       console.log("ready  :"+xhr.responseText)
+    //     }else{
+    //     console.log("not ready  :"+xhr.responseText)
+    //     }
+    //   }
+    //   // xhr.send("name=domenic%message="+ finger);
+    //   xhr.send("message=" + finger);
+    // }
+    function do_ajax(){
+      var req = new XMLHttpRequest();
+      finger = $.ajax({
+              url: "../opencmd.py",
+              context: document.body
             }).done(function() {
-             alert('finished python script');;
+              return context
             });
-
-
-      // const xhr = new XMLHttpRequest();
-
-      // xhr.open("POST","localhost:8000/yubi");
-      // xhr.setRequestHeader("Content-type" , "application/x-www-form-urlencoded");
-      // xhr.send("name=domenic%message=how its going");
-      
+      req.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200) {
+          result.innerHTML = this.responseText;
+        } else {
+          result.innerHTML = "処理中...";
+        }
+      }
     }
-
-
-  // const button = document.getElementById('yubi');
-
-  // button.addEventListener('click', function () {
-  //   fetch('https://localhost:8000/yubi')
-  //       .then(function (result) {
-  //           console.log(result);
-  //       })
-  //       .catch(function (err) {
-  //           console.error(err);
-  //     });
-  // });
-
 
   </script>
   </body>
