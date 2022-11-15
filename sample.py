@@ -1,3 +1,4 @@
+# -*-coding : utf-8 -*-
 import cv2
 import base64
 import numpy as np
@@ -6,23 +7,37 @@ import io
 from PIL import ImageFont, ImageDraw, Image
 import glob
 import mysql.connector
+from mysql.connector import Error
 
-def main():
-    connection = mysql.connector.connect(
-        host='localhost', # 接続先
-        port='3306',
-        user='root', # mysqlのuser
-        password='', # mysqlのpassword
-        database='hoge', 
-        use_pure=True,
-    )
+connection = mysql.connector.connect(host='localhost',
+                                         database='face',
+                                         user='root',
+                                         password='')
+
+try:
+   
+    if connection.is_connected():
+        db_Info = connection.get_server_info()
+        print("Connected to MySQL Server version ", db_Info)
+        cursor = connection.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("You're connected to database: ", record)
+
+except Error as e:
+    print("Error while connecting to MySQL", e)
+finally:
+    if connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("MySQL connection is closed")
+
 
     # コネクションが切れたときに再接続してくれるように設定
     connection.ping(reconnect=True)
     
     # 接続できているかの確認
     print(connection.is_connected())
-
 
 face_locations = []
 
