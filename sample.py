@@ -8,36 +8,48 @@ from PIL import ImageFont, ImageDraw, Image
 import glob
 import mysql.connector
 from mysql.connector import Error
+import os
 
 connection = mysql.connector.connect(host='localhost',
                                          database='face',
                                          user='root',
-                                         password='')
+                                         password='root')
 
-try:
+with connection.cursor() as cursor:
+        # データ読み込み
+        sql = "SELECT data_face FROM data_table"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        print(result)
+ 
+# 終了処理
+cursor.close()
+
+# try:
    
-    if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = connection.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
+#     if connection.is_connected():
+#         db_Info = connection.get_server_info()
+#         print("Connected to MySQL Server version ", db_Info)
+#         cursor = connection.cursor()
+#         cursor.execute("select database();")
+#         record = cursor.fetchone()
+#         print("You're connected to database: ", record)
+        
 
-except Error as e:
-    print("Error while connecting to MySQL", e)
-finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("MySQL connection is closed")
+# except Error as e:
+#     print("Error while connecting to MySQL", e)
+# finally:
+#     if connection.is_connected():
+#         cursor.close()
+#         connection.close()
+#         print("MySQL connection is closed")
 
 
     # コネクションが切れたときに再接続してくれるように設定
-    connection.ping(reconnect=True)
+connection.ping(reconnect=True)
     
     # 接続できているかの確認
-    print(connection.is_connected())
+print(connection.is_connected())
 
 face_locations = []
 
@@ -87,5 +99,13 @@ else:
 #     best_match_index = np.argmin(face_distances)
 #     if matches[best_match_index]:
 #         name = known_face_names[best_match_index]
+
+for fname in os.listdir(r"C:\Users\nhs90629\Documents\GitHub\GP41_G4\data_picture"):
+    face_locations = face_recognition.face_locations(img)
+    if face_locations:
+        print("画像に顔があります。")
+    else:
+        print("画像に顔がありません。")
+    print(fname)
 
 print("hello")
