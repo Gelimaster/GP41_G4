@@ -109,3 +109,44 @@ for fname in os.listdir(r"C:\Users\nhs90629\Documents\GitHub\GP41_G4\data_pictur
     print(fname)
 
 print("hello")
+
+path = 'data_picture'
+images = []
+classNames = []
+myList = os.listdir(path)
+# step1 画像読み込みとコンバート
+for cls in myList:
+    img_elon = face_recognition.load_image_file(f'{path}/{cls}')
+    img_elon = cv2.cvtColor(img_elon, cv2.COLOR_BGR2RGB)
+    img_test = face_recognition.load_image_file('send_picture/decode.jpg')
+    img_test = cv2.cvtColor(img_test, cv2.COLOR_BGR2RGB)
+
+    # step2 顔認証
+    face_loc = face_recognition.face_locations(img_elon)[0]
+
+    # 128次元の顔エンコーディングのリスト
+    encode_elon = face_recognition.face_encodings(img_elon)[0]
+    cv2.rectangle(img_elon, (face_loc[3], face_loc[0]), (face_loc[1], face_loc[2]), (255, 0, 255), 2)
+
+    face_loc_test = face_recognition.face_locations(img_test)[0]
+    encode_elon_test = face_recognition.face_encodings(img_test)[0]
+
+    # print(encode_elon_test)
+    cv2.rectangle(img_test, (face_loc_test[3], face_loc_test[0]), (face_loc_test[1], face_loc_test[2]), (255, 0, 255), 2)
+
+    # ２つの画像が同一人物かの判定
+    results = face_recognition.compare_faces([encode_elon], encode_elon_test)
+    # 値が小さい程マッチしている
+    face_dis = face_recognition.face_distance([encode_elon], encode_elon_test)
+    print(results, face_dis)
+
+# 8秒でwindowが閉じる設定
+cv2.startWindowThread()
+cv2.imshow('Elon Musk', img_elon)
+cv2.imshow('Elon Test', img_test)
+
+cv2.waitKey(8000)
+
+cv2.waitKey(1)
+cv2.destroyAllWindows()
+cv2.waitKey(1)
