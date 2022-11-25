@@ -13,7 +13,9 @@ import os
 connection = mysql.connector.connect(host='localhost',
                                          database='face',
                                          user='root',
-                                         password='root')
+                                         password='root',
+                                         charset='utf8')
+
 
 with connection.cursor() as cursor:
         # データ読み込み
@@ -49,7 +51,10 @@ cursor.close()
 connection.ping(reconnect=True)
     
     # 接続できているかの確認
-print(connection.is_connected())
+if connection.is_connected() == True:
+    print("接続しました。")
+elif connection.is_connected() == False:
+    print("接続できませんでした。")
 
 face_locations = []
 
@@ -70,14 +75,13 @@ img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
 #画像を保存する場合
 cv2.imwrite(image_file,img)
 
- # 画像を縦1/4 横1/4に圧縮
+# 画像を縦1/4 横1/4に圧縮
 #small_frame = cv2.resize(image_file, (0,0), fx=0.25, fy=0.25)
 # 顔の位置情報を検索
 face_locations = face_recognition.face_locations(img)
-if face_locations:
-    print("画像に顔があります。")
-else:
+if face_locations==False:
     print("画像に顔がありません。")
+
 
 # 顔画像の符号化
 #face_encodings = face_recognition.face_encodings(small_frame, face_locations)
@@ -100,15 +104,10 @@ else:
 #     if matches[best_match_index]:
 #         name = known_face_names[best_match_index]
 
-for fname in os.listdir(r"C:\Users\nhs90629\Documents\GitHub\GP41_G4\data_picture"):
+for fname in os.listdir(r"C:\Users\nhs90632\Documents\GitHub\GP41_G4\data_picture"):
     face_locations = face_recognition.face_locations(img)
-    if face_locations:
-        print("画像に顔があります。")
-    else:
+    if face_locations ==False:
         print("画像に顔がありません。")
-    print(fname)
-
-print("hello")
 
 path = 'data_picture'
 images = []
@@ -138,12 +137,20 @@ for cls in myList:
     results = face_recognition.compare_faces([encode_elon], encode_elon_test)
     # 値が小さい程マッチしている
     face_dis = face_recognition.face_distance([encode_elon], encode_elon_test)
-    print(results, face_dis)
+
+    if results == [True]:
+        print(cls)
+        print("ログインしました。")
+        break
+    elif results == [False]:
+        print("ログインに失敗しました。")
 
 # 8秒でwindowが閉じる設定
 cv2.startWindowThread()
-cv2.imshow('Elon Musk', img_elon)
-cv2.imshow('Elon Test', img_test)
+
+#画像をwindowに出すテスト用
+#cv2.imshow('Elon Musk', img_elon)
+#cv2.imshow('Elon Test', img_test)
 
 cv2.waitKey(8000)
 
