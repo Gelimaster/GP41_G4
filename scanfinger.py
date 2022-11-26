@@ -131,7 +131,7 @@ class FingerPrint:
             # print(f"Identity AccountSid Size\t: {self.identity.Value.AccountSid.Size}")
             # print(f"Rejected Details:\t{hex(reject_detail.value)}")
             x =list(self.identity.Value.AccountSid.Data)[0:self.identity.Value.AccountSid.Size]
-            return x
+            return True
 
     def verify(self):
         match = ctypes.c_bool(0)

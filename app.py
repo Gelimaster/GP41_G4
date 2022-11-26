@@ -1,6 +1,7 @@
-from flask import Flask, request ,render_template
+from flask import Flask, request ,render_template, redirect
 from scanfinger import *
 from opencmd import *
+from dbconnect import *
 import json
 import hashlib
 app = Flask(__name__)
@@ -24,13 +25,21 @@ def index():
    
 
     return render_template("index.html")
-
+#登録
 @app.route('/register',methods=["POST","GET"])
 def register():
-    name = request.args.get('message')
-    return name
     if request.method == "POST":
-        return render_template("index1.html")
+        username= request.form["name"]       
+        phone= request.form["mail"]
+        email=request.form["phone"]
+        if register_user(username,email,phone):
+            return render_template("done.html")
+        else:
+            return render_template("index.html")    
+            
+@app.route('/test',methods=["POST","GET"])          
+def test():
+   return render_template("register.html")
     
 # 顔認証のルート
 @app.route('/kao')
@@ -39,18 +48,39 @@ def face_login():
     #text = request.args.get('text', '')
     return render_template("index.html")
 
-@app.route('/cmd')
-def cmdopen():
-   return test()
         
 
-
-
-#指紋認証のルート
+#指紋認証のルートログイン
 @app.route('/yubi',methods=['POST','GET'])
+def register_yubi():
+    myFP = FingerPrint()
+    try:
+        myFP.open()
+         #指情報
+        fingerdata= myFP.identify()  
+        #成功の場合
+        if fingerdata :
+            return render_template("Fingerlogin.html")
+        #失敗の場合    
+        else:
+            return render_template("Failfinger.html")      
+    finally:
+        myFP.close()
+    
+
+
+#指紋認証のルート登録
+@app.route('/registeryubi',methods=['POST','GET'])
+#指コード利用する
 def finger_login():
-    message = request.args.get('message')
-    return message  
+    myFP = FingerPrint()
+    try:
+        myFP.open()
+         #指情報
+        fingerdata= myFP.identify()        
+    finally:
+        myFP.close()
+
 
 
 

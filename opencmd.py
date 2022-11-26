@@ -9,7 +9,7 @@ def open():
 
 def test():
     # returned_text = subprocess.getoutput(os.system("start cmd /k dir   /k exit"))
-    x =os.system("start cmd /k dir")
+    x =os.system("start cmd /k python3 scanfinger.py")
     print(os.system("dir"))
     # cmd = ['start','cmd','/k','dir','']
     # subprocess.Popen(cmd)

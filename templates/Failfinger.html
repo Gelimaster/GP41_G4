@@ -5,11 +5,12 @@
     <title>GP41 433</title>
   </head>
   <body>
-    <h1>testing</h1>
+    <h1>Failed to log in</h1>
+    <p>ログイン失敗</p>
     <button id="button1" onclick="test()" type="button" name="button">press me</button>
-    <button onclick="openew()">finger register</button>
-    <button onclick="openew2()">finger login</button>
-    <button onclick="openew3()">user register</button>
+    <button onclick="openew()">1</button>
+    <button onclick="openew2()">2</button>
+    <button onclick="openew3()">3</button>
     <a href="localhost:8000/yubi">login</a>
     <div id="loginbox" style="display:none  ;">
        <p>login</p>
@@ -30,11 +31,11 @@
       window.open(url);
     }
     function openew2(){
-      url = "http://localhost:8000/yubi";
+      url = "localhost:8000/";
       window.open(url);
     }
     function openew3(){
-      url = "register.html";
+      url = "localhost:8000/cmd";
       window.open(url);
     }
     function test(){
