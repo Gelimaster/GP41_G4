@@ -4,6 +4,7 @@ from opencmd import *
 from dbconnect import *
 import json
 import hashlib
+import subprocess as sp
 app = Flask(__name__)
 
 
@@ -22,6 +23,8 @@ app = Flask(__name__)
 def index():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
+    out = sp.run(["php", "conn.php"], stdout=sp.PIPE)
+    return out.stdout
    
 
     return render_template("index.html")
