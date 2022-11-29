@@ -5,7 +5,7 @@ conn=""
 def register_user(username,mail,phone):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='root', password='password', host='127.0.0.1',port=4444, database='gp41_db')
+    user='root', password='root', host='127.0.0.1',port=4444, database='gp41_db')
     print("start connect")
 
     #Creating a cursor object using the cursor() method
