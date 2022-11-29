@@ -104,7 +104,7 @@ if face_locations==False:
 #     if matches[best_match_index]:
 #         name = known_face_names[best_match_index]
 
-for fname in os.listdir(r"C:\Users\nhs90632\Documents\GitHub\GP41_G4\data_picture"):
+for fname in os.listdir(r"C:\Users\nhs90629\Documents\GitHub\GP41_G4\data_picture"):
     face_locations = face_recognition.face_locations(img)
     if face_locations ==False:
         print("画像に顔がありません。")
