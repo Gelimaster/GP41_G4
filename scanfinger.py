@@ -131,7 +131,7 @@ class FingerPrint:
             # print(f"Identity AccountSid Size\t: {self.identity.Value.AccountSid.Size}")
             # print(f"Rejected Details:\t{hex(reject_detail.value)}")
             x =list(self.identity.Value.AccountSid.Data)[0:self.identity.Value.AccountSid.Size]
-            return True
+            return x
 
     def verify(self):
         match = ctypes.c_bool(0)
@@ -241,8 +241,11 @@ if __name__ == '__main__':
         myFP.open()
          #myFP.identify()
         fingerdata= myFP.identify()
-        finger=str(fingerdata)
-        sha256.update(finger.encode("utf-8"))
-        print(sha256.hexdigest())         
+        if fingerdata != False: 
+            finger=str(fingerdata)
+            sha256.update(finger.encode("utf-8"))
+            print(sha256.hexdigest())
+        else:
+            print("bad finger")             
     finally:
         myFP.close()

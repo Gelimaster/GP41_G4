@@ -1,7 +1,7 @@
 from flask import Flask, request ,render_template, redirect
 from scanfinger import *
 from opencmd import *
-from dbconnect import *
+# from dbconnect import *
 import json
 import hashlib
 import subprocess as sp
@@ -62,7 +62,7 @@ def register_yubi():
          #指情報
         fingerdata= myFP.identify()  
         #成功の場合
-        if fingerdata :
+        if fingerdata != False :
             return render_template("Fingerlogin.html")
         #失敗の場合    
         else:
