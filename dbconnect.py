@@ -5,7 +5,7 @@ conn=""
 def register_user(username,mail,phone):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='root', password='root', host='127.0.0.1',port=4444, database='gp41_db')
+    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
     print("start connect")
 
     #Creating a cursor object using the cursor() method
@@ -43,7 +43,7 @@ def register_user(username,mail,phone):
 def register_yubi(result,username):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='root', password='password', host='localhost:4444', database='gp41_db')
+    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
 
     #Creating a cursor object using the cursor() method
     cursor = conn.cursor()  
@@ -78,7 +78,7 @@ def register_yubi(result,username):
 def register_kao(face,username):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='root', password='password', host='localhost:4444', database='gp41_db')
+    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
 
     #Creating a cursor object using the cursor() method
     cursor = conn.cursor()  
