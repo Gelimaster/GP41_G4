@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/faceCamera.css">
+  <title>by-Pus</title>
+</head>
+<body>
+
+  <!-- ヘッダー --------------->
+  <header>
+    <h1 class="headerLogo"><img src="images/icon-128x128.png" alt="by-Pus ロゴ"></h1>
+
+    <!-- ナビゲーション --------------->
+    <nav>
+      <ul>
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="#">ログイン・新規登録</a></li>
+      </ul>
+    </nav>
+  </header>
+    <!-- メインコンテンツ --------------->
+  <div class="mainDiv">
+
+    <div id="cameraFrame">
+    </div>
+
+    <div id="camerabtn">
+      <button class="btn-sf-like">顔 認 証</button>
+    </div>
+
+  </div>
+  <!-- フッター --------------->
+  <footer>
+    <small>© 2022 by-Pus --NH433--</small>
+  </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(reg => {
+        console.log('サービスワーカーを登録しました', reg);
+      }).catch(err => {
+        console.log('登録失敗', err);
+      });
+    }
+  </script>
+</body>
+</html>
