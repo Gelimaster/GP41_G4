@@ -7,6 +7,7 @@
 import ctypes
 from ctypes import wintypes
 import hashlib
+import os
 
 
 SECURITY_MAX_SID_SIZE = 68
@@ -239,6 +240,7 @@ if __name__ == '__main__':
     myFP = FingerPrint()
     try:
         myFP.open()
+        print("put your finger")
          #myFP.identify()
         fingerdata= myFP.identify()
         if fingerdata != False: 
@@ -249,3 +251,4 @@ if __name__ == '__main__':
             print("bad finger")             
     finally:
         myFP.close()
+        os.system("taskkill /f /im cmd.exe")

@@ -1,7 +1,7 @@
 from flask import Flask, request ,render_template, redirect
 from scanfinger import *
 from opencmd import *
-# from dbconnect import *
+from dbconnect import *
 import json
 import hashlib
 import subprocess as sp
@@ -23,11 +23,16 @@ app = Flask(__name__)
 def index():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    out = sp.run(["php", "conn.php"], stdout=sp.PIPE)
+    out = sp.run(["php", "test.php"], stdout=sp.PIPE)
     return out.stdout
    
 
-    return render_template("index.html")
+@app.route('/finger.php',methods=["POST","GET"])
+def aaa():
+    # textで指定されたパラメータをJsonに整形して返す
+    #text = request.args.get('text', '')
+    out = sp.run(["php", "finger.php"], stdout=sp.PIPE)
+    return out.stdout
 #登録
 @app.route('/register',methods=["POST","GET"])
 def register():
@@ -41,8 +46,8 @@ def register():
             return render_template("index.html")    
             
 @app.route('/test',methods=["POST","GET"])          
-def test():
-   return render_template("register.html")
+def test1():
+   return  test()
     
 # 顔認証のルート
 @app.route('/kao')
@@ -83,28 +88,6 @@ def finger_login():
         fingerdata= myFP.identify()        
     finally:
         myFP.close()
-
-
-
-
-    # myFP = FingerPrint()
-    # try:
-    #     myFP.open()
-    #     print("<p>Please touch the fingerprint sensor</p>")
-    #     userfinger = myFP.identify()
-    #     print("<p>processing</p>")
-    #     return userfinger
-    #     #check wich ID it is and log in
-    # #     if userfing:
-    # #     else:
-    # finally:
-    #     myFP.close()
-
-
-
-    # textで指定されたパラメータをJsonに整形して返す
-    #text = request.args.get('text', '')
-    
 
 # 外部に公開できるようにポート開放
 if __name__ == '__main__':
