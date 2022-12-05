@@ -23,7 +23,7 @@ app = Flask(__name__)
 def index():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    out = sp.run(["php", "test.php"], stdout=sp.PIPE)
+    out = sp.run(["php", "templates/test.php"], stdout=sp.PIPE)
     return out.stdout
    
 
@@ -31,7 +31,7 @@ def index():
 def aaa():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    out = sp.run(["php", "finger.php"], stdout=sp.PIPE)
+    out = sp.run(["php", "templates/finger.php"], stdout=sp.PIPE)
     return out.stdout
 #登録
 @app.route('/register',methods=["POST","GET"])
