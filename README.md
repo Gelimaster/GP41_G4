@@ -14,8 +14,10 @@
 ログインボタンのアイコンはiconf.jpgを利用してください。
 
 #### 2  Bypus APIに接続方法
-XXXXリンクにPostを送信することでAPIと通信することが出来ます
+XXXXリンクにPostを送信することでAPIから返事が届きます。
 APIエンドポイントは以下があります。
+
+例) XXXXXX/registerに送信
 
 ```bash
 ************登録************
@@ -27,9 +29,9 @@ APIエンドポイントは以下があります。
    送信必要パラメータ
    user_name #ユーザ名
    email #メールアドレス
-   phone_number #電話番号*
-   fingerprint #指紋認証*
-   faceid #顔認証* 
+   phone_number* #電話番号
+   fingerprint* #指紋認証
+   faceid* #顔認証
 
 #指紋認証登録
 /registerfinger
@@ -51,14 +53,14 @@ APIエンドポイントは以下があります。
 
 #指紋認証でログイン
 /loginfinger
-   ログインするためのエンドポイント
+   指紋認証でログイン
 
    送信必要パラメータ
    fingerprint #指紋認証
 
 #顔認証でログイン
-/loginfinger
-   ログインするためのエンドポイント
+/loginface
+   顔認証でログイン
 
    送信必要パラメータ
    faceid #顔認証 
@@ -66,16 +68,25 @@ APIエンドポイントは以下があります。
 ************更新************
 
 /updateuser
+   ユーザの情報を変更したい場合
+
 /updatefinger
+   ユーザの指紋認証データの変更
+
 /updateface
+   ユーザの顔認証データを変更
 
 
 
 
 ************削除************
 /deleteuser
+   ユーザを削除する
 /deletefinger
+   ユーザの指紋認証データを削除
+
 /deleteface
+   ユーザの顔認証データを削除
 
 
 *必須ではないパラメータ
