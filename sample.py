@@ -27,26 +27,6 @@ with connection.cursor() as cursor:
 # 終了処理
 cursor.close()
 
-# try:
-   
-#     if connection.is_connected():
-#         db_Info = connection.get_server_info()
-#         print("Connected to MySQL Server version ", db_Info)
-#         cursor = connection.cursor()
-#         cursor.execute("select database();")
-#         record = cursor.fetchone()
-#         print("You're connected to database: ", record)
-        
-
-# except Error as e:
-#     print("Error while connecting to MySQL", e)
-# finally:
-#     if connection.is_connected():
-#         cursor.close()
-#         connection.close()
-#         print("MySQL connection is closed")
-
-
     # コネクションが切れたときに再接続してくれるように設定
 connection.ping(reconnect=True)
     
@@ -57,6 +37,70 @@ elif connection.is_connected() == False:
     print("接続できませんでした。")
 
 face_locations = []
+
+
+#追加箇所カメラ起動し画像をencodeフォルダに保存
+#-------------------------------------------------------------------------------------------------------------------
+
+def save_frame_camera_key(device_num, dir_path, basename, ext='jpg', delay=1, window_name='frame'):
+    cap = cv2.VideoCapture(device_num)
+
+    if not cap.isOpened():
+        return
+
+    os.makedirs(dir_path, exist_ok=True)
+    base_path = os.path.join(dir_path, basename)
+
+    while True:
+        ret, frame = cap.read()
+        cv2.imshow(window_name, frame)
+        key = cv2.waitKey(delay) & 0xFF
+        #cを押すと画像を保存
+        #
+        if key == ord('c'):
+            cv2.imwrite('{}.{}'.format(base_path, ext), frame)
+        elif key == ord('q'):
+            break
+
+    cv2.destroyWindow(window_name)
+
+
+save_frame_camera_key(0, 'encode', 'encode')
+
+#Base64でエンコードする画像のパス
+target_file=r"encode/encode.jpg"
+#エンコードした画像の保存先パス
+encode_file=r"encode/encode.txt"
+
+with open(target_file, 'rb') as f:
+    data = f.read()
+#Base64で画像をエンコード
+encode=base64.b64encode(data)
+with open(encode_file,"wb") as f:
+    f.write(encode)
+
+    target_file=r"encode/encode.txt"
+#デコードされた画像の保存先パス
+image_file=r"decode.jpg"
+
+with open(target_file, 'rb') as f:
+    img_base64 = f.read()
+
+#バイナリデータ <- base64でエンコードされたデータ  
+img_binary = base64.b64decode(img_base64)
+jpg=np.frombuffer(img_binary,dtype=np.uint8)
+
+#raw image <- jpg
+img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
+#画像を保存する場合
+cv2.imwrite(image_file,img)
+
+#表示確認
+cv2.imshow('window title', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+#----------------------------------------------------------------------------------------------------------------
 
 #Base64でエンコードされたファイルのパス
 target_file=r"sample.txt"
@@ -104,7 +148,7 @@ if face_locations==False:
 #     if matches[best_match_index]:
 #         name = known_face_names[best_match_index]
 
-for fname in os.listdir(r"C:\Users\nhs90629\Documents\GitHub\GP41_G4\data_picture"):
+for fname in os.listdir(r"C:\Users\nhs90632\Documents\GitHub\GP41_G4\data_picture"):
     face_locations = face_recognition.face_locations(img)
     if face_locations ==False:
         print("画像に顔がありません。")
