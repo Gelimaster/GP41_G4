@@ -1,3 +1,111 @@
+## Bypusの使い方
+
+# 準備
+
+#### 1  プログラム
+指紋認証と顔認証を取れるプログラム
+(なければこのブランチのscanfinger.py(指紋認証プログラム)とXXXファイル（顔認証プログラム)を利用出来ます。
+
+#### 2  サーバ
+これらのプログラムをサーバで実行できるようにしましょう
+
+
+#### 3  ボタンのアイコン
+ログインボタンのアイコンはiconf.jpgを利用してください。
+
+#### 2  Bypus APIに接続方法
+XXXXリンクにPostを送信することでAPIと通信することが出来ます
+APIエンドポイントは以下があります。
+
+```bash
+************登録************
+
+#ユーザ登録
+/register
+   ユーザを登録するポート
+   
+   送信必要パラメータ
+   user_name #ユーザ名
+   email #メールアドレス
+   phone_number #電話番号*
+   fingerprint #指紋認証*
+   faceid #顔認証* 
+
+#指紋認証登録
+/registerfinger
+   登録されてるユーザに指紋認証を登録
+
+   送信必要パラメータ
+   user_id #ユーザのID
+   fingerprint #指紋認証
+
+#顔認証登録
+/registerface
+   登録されているユーザに顔認証を登録
+   
+   送信必要パラメータ
+   user_id #ユーザID
+   faceid #顔認証
+
+************ログイン************
+
+#指紋認証でログイン
+/loginfinger
+   ログインするためのエンドポイント
+
+   送信必要パラメータ
+   fingerprint #指紋認証
+
+#顔認証でログイン
+/loginfinger
+   ログインするためのエンドポイント
+
+   送信必要パラメータ
+   faceid #顔認証 
+
+************更新************
+
+/updateuser
+/updatefinger
+/updateface
+
+
+
+
+************削除************
+/deleteuser
+/deletefinger
+/deleteface
+
+
+*必須ではないパラメータ
+```
+
+
+## プロジェクトを自分のPCにダウンロードの仕方（クローンの仕方）
+
+まずはVisual Studioのターミナルかコマンドプロンプトを開きクローンしたいフォルダまで移動します。
+
+```bash
+例：
+PC/ユーザー/AndroidStudioProjects
+cd C:\Users\NHS90324\AndroidStudioProjects
+```
+
+移動出来たら次のコマンドを実行する（githubをインストールしてないとできません）
+
+```bash
+ git clone https://github.com/tanakaho/IH4C_G3_android.git
+```
+これでインストールが開始されます。
+インストール・更新はコマンドプロンプトかVSで行う必要があります（VSの場合は簡単にできます）
+
+
+
+
+
+
+
 ## GitHub 使い方
 
 # GP41_G4
