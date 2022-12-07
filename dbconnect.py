@@ -5,7 +5,7 @@ conn=""
 def register_user(username,mail,phone):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
+    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='gp41_db')
     print("start connect")
 
     #Creating a cursor object using the cursor() method
@@ -16,7 +16,7 @@ def register_user(username,mail,phone):
     # Preparing SQL query to INSERT a record into the database.
     sql = """INSERT INTO user_table(
     user_name,user_mailaddress,user_phone)
-    VALUES ("""+username+""","""+mail+""","""+phone+""")"""
+    VALUES ('"""+username+"""','"""+mail+"""','"""+phone+"""')"""
     print("executing query")
     print(sql)
     try:
@@ -40,23 +40,18 @@ def register_user(username,mail,phone):
         return False
 
 
-def register_yubi(result,username):
+def register_yubi(username,email,phone,fingerdata):
     #establishing the connection
     conn = mysql.connector.connect(
     user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
-
     #Creating a cursor object using the cursor() method
     cursor = conn.cursor()  
-    cursor2= conn.cursor()
-    #ユーザのIDを取得
-    sqlid="""SELECT"""+username +"""   FROM user_id("""
-
-
     # Preparing SQL query to INSERT a record into the database.
-    sql = """INSERT INTO data_table(
+    sql = """INSERT INTO user_table(
     user_name,user_mailaddress,user_phone)
-    VALUES ("""+username+""",example@gmail.com,080-XXXX-XXXX)"""
-
+    VALUES ('"""+username+"""','"""+email+"""','"""+phone+"""')"""
+    print("executing query")
+    print(sql)    
     try:
         # Executing the SQL command
         cursor.execute(sql)
@@ -65,7 +60,45 @@ def register_yubi(result,username):
         conn.commit()
 
         print("success")
+        print("get success user id")
+        sql="""SELECT SCOPE_IDENTITY()"""
+        print("executing query")
+        print(sql) 
+        try:
+            id=cursor.execute(sql)
+            print(id)
+            print("success")
+            print("insert fingerdata")
+            sql = """INSERT INTO user_table(user_id,data_finger)
+            VALUES ('"""+id+"""','"""+fingerdata+"""')"""
+            print("executing query")
+            print(sql) 
+            try:
+                # Executing the SQL command
+                cursor.execute(sql)
+                
+                # Commit your changes in the database
+                conn.commit()
+                print("success")
 
+            except:    
+                 # Rolling back in case of error
+                conn.rollback()
+
+                # Closing the connection
+                conn.close()
+
+                print("error finger error")
+                return False
+        except:
+            # Rolling back in case of error
+            conn.rollback()
+
+            # Closing the connection
+            conn.close()
+
+            print("error id fail")
+            return False
     except:
         # Rolling back in case of error
         conn.rollback()
@@ -73,7 +106,9 @@ def register_yubi(result,username):
         # Closing the connection
         conn.close()
 
-        print("error")
+        print("user error")
+        return False
+
 
 def register_kao(face,username):
     #establishing the connection

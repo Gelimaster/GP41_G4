@@ -18,28 +18,37 @@ app = Flask(__name__)
 #以下のリンクで詳細がわかる
 # https://docs.python.org/ja/3/library/hashlib.html
 
-
+#main page  DONE
 @app.route('/')
 def index():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    out = sp.run(["php", "templates/test.php"], stdout=sp.PIPE)
-    return out.stdout
-   
+    # out = sp.run(["php", "templates/test.php"], stdout=sp.PIPE)
+    # return out.stdout
+   return render_template("index.html")
 
-@app.route('/finger.php',methods=["POST","GET"])
+# decide if going to register finger or face
+@app.route('/data',methods=["POST","GET"])
 def aaa():
+    if request.method == "POST":
+        username= request.form["name"]       
+        email= request.form["mail"]
+        phone=request.form["phone"]
+        data = {'username':username,'email':email,'phone':phone}
+        return render_template("fingerface.html",data=data)
+
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    out = sp.run(["php", "templates/finger.php"], stdout=sp.PIPE)
-    return out.stdout
-#登録
+
+
+
+#登録 DONE
 @app.route('/register',methods=["POST","GET"])
 def register():
     if request.method == "POST":
         username= request.form["name"]       
-        phone= request.form["mail"]
-        email=request.form["phone"]
+        email= request.form["mail"]
+        phone=request.form["phone"]
         if register_user(username,email,phone):
             return render_template("done.html")
         else:
@@ -49,8 +58,8 @@ def register():
 def test1():
    return  test()
     
-# 顔認証のルート
-@app.route('/kao')
+# 顔認証登録
+@app.route('/face')
 def face_login():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
@@ -58,9 +67,14 @@ def face_login():
 
         
 
-#指紋認証のルートログイン
+#指紋認証登録
 @app.route('/yubi',methods=['POST','GET'])
 def register_yubi():
+    if request.method == "POST":
+        username= request.form["name"]       
+        email= request.form["mail"]
+        phone=request.form["phone"]
+    sha256 = hashlib.sha256()
     myFP = FingerPrint()
     try:
         myFP.open()
@@ -68,7 +82,13 @@ def register_yubi():
         fingerdata= myFP.identify()  
         #成功の場合
         if fingerdata != False :
-            return render_template("Fingerlogin.html")
+            finger=str(fingerdata)
+            sha256.update(finger.encode("utf-8"))
+            fingerdata = sha256.hexdigest()
+            if register_yubi(username,email,phone,fingerdata):
+                return render_template("done.html")
+            else:
+                return render_template("Fingerlogin.html")
         #失敗の場合    
         else:
             return render_template("Failfinger.html")      
