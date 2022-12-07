@@ -69,7 +69,7 @@ def face_login():
 
 #指紋認証登録
 @app.route('/yubi',methods=['POST','GET'])
-def register_yubi():
+def yubi_register():
     if request.method == "POST":
         username= request.form["name"]       
         email= request.form["mail"]
