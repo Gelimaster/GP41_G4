@@ -27,6 +27,9 @@ def register_user(username,mail,phone):
         conn.commit()
 
         print("success")
+        
+
+        
         return True
 
     except:
@@ -43,7 +46,7 @@ def register_user(username,mail,phone):
 def register_yubi(username,email,phone,fingerdata):
     #establishing the connection
     conn = mysql.connector.connect(
-    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='mysql')
+    user='tsudura10th', password='U5RSSqJA', host='gp41db.mysql.database.azure.com',port=3306, database='gb41_db')
     #Creating a cursor object using the cursor() method
     cursor = conn.cursor()  
     # Preparing SQL query to INSERT a record into the database.
@@ -61,16 +64,17 @@ def register_yubi(username,email,phone,fingerdata):
 
         print("success")
         print("get success user id")
-        sql="""SELECT SCOPE_IDENTITY()"""
+        sql="""SELECT @@IDENTITY"""
         print("executing query")
         print(sql) 
         try:
-            id=cursor.execute(sql)
-            print(id)
+            cursor.execute(sql)
+            id = cursor.fetchone()
+            print(id[0])
             print("success")
             print("insert fingerdata")
             sql = """INSERT INTO user_table(user_id,data_finger)
-            VALUES ('"""+id+"""','"""+fingerdata+"""')"""
+            VALUES ('"""+id[0]+"""','"""+fingerdata+"""')"""
             print("executing query")
             print(sql) 
             try:
