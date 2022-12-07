@@ -21,13 +21,9 @@ app = Flask(__name__)
 #main page  DONE
 @app.route('/')
 def index():
-    # textで指定されたパラメータをJsonに整形して返す
-    #text = request.args.get('text', '')
-    # out = sp.run(["php", "templates/test.php"], stdout=sp.PIPE)
-    # return out.stdout
    return render_template("index.html")
 
-# decide if going to register finger or face
+# decide if going to register finger or face　DONE
 @app.route('/data',methods=["POST","GET"])
 def aaa():
     if request.method == "POST":
@@ -40,8 +36,6 @@ def aaa():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
 
-
-
 #登録 DONE
 @app.route('/register',methods=["POST","GET"])
 def register():
@@ -49,16 +43,10 @@ def register():
         username= request.form["name"]       
         email= request.form["mail"]
         phone=request.form["phone"]
-        if register_user(username,email,phone):
-            return render_template("done.html")
-        else:
-            return render_template("index.html")    
-            
-@app.route('/test',methods=["POST","GET"])          
-def test1():
-   return  test()
+        result =register_user(username,email,phone)
+        return result  
     
-# 顔認証登録
+# 顔認証登録 inprogress....
 @app.route('/face')
 def face_login():
     # textで指定されたパラメータをJsonに整形して返す
@@ -67,7 +55,7 @@ def face_login():
 
         
 
-#指紋認証登録
+#指紋認証登録 DONE
 @app.route('/yubi',methods=['POST','GET'])
 def yubi_register():
     if request.method == "POST":
@@ -85,29 +73,30 @@ def yubi_register():
             finger=str(fingerdata)
             sha256.update(finger.encode("utf-8"))
             fingerdata = sha256.hexdigest()
-            if register_yubi(username,email,phone,fingerdata):
-                return render_template("done.html")
-            else:
-                return render_template("Fingerlogin.html")
+            result=register_yubi(username,email,phone,fingerdata)
+            return result
         #失敗の場合    
         else:
-            return render_template("Failfinger.html")      
+            return "指紋認証失敗"    
     finally:
         myFP.close()
+
+
+# ログイン顔認証 inprogress....
+@app.route('/loginface')
+def login_face():
+
     
+    return render_template("index.html")
 
+# ログイン指紋認証 inprogress.... 
+@app.route('/loginfinger')
+def login_finger():
 
-#指紋認証のルート登録
-@app.route('/registeryubi',methods=['POST','GET'])
-#指コード利用する
-def finger_login():
-    myFP = FingerPrint()
-    try:
-        myFP.open()
-         #指情報
-        fingerdata= myFP.identify()        
-    finally:
-        myFP.close()
+    
+    return render_template("index.html")
+    
+        
 
 # 外部に公開できるようにポート開放
 if __name__ == '__main__':
