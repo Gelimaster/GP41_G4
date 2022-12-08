@@ -1,9 +1,8 @@
 from flask import Flask, request ,render_template, redirect
+import base64
 from scanfinger import *
 from opencmd import *
 from dbconnect import *
-import json
-import hashlib
 import subprocess as sp
 app = Flask(__name__)
 
@@ -62,7 +61,6 @@ def yubi_register():
         username= request.form["name"]       
         email= request.form["mail"]
         phone=request.form["phone"]
-    sha256 = hashlib.sha256()
     myFP = FingerPrint()
     try:
         myFP.open()
@@ -71,9 +69,9 @@ def yubi_register():
         #成功の場合
         if fingerdata != False :
             finger=str(fingerdata)
-            sha256.update(finger.encode("utf-8"))
-            fingerdata = sha256.hexdigest()
-            result=register_yubi(username,email,phone,fingerdata)
+            fingerdata= finger.encode('ascii')
+            finger64=base64.b64encode(fingerdata)
+            result=register_yubi(username,email,phone,finger64)
             return result
         #失敗の場合    
         else:
@@ -85,16 +83,31 @@ def yubi_register():
 # ログイン顔認証 inprogress....
 @app.route('/loginface')
 def login_face():
-
-    
     return render_template("index.html")
 
-# ログイン指紋認証 inprogress.... 
-@app.route('/loginfinger')
-def login_finger():
-
+#ログインページ done
+@app.route('/login')
+def login():
+    return render_template("login.html")
     
-    return render_template("index.html")
+# ログイン指紋認証 done
+@app.route('/loginfinger',methods=['POST','GET'])
+def login_finger():  
+    myFP = FingerPrint()
+    try:
+        myFP.open()
+        #指情報
+        fingerdata= myFP.identify()  
+        #成功の場合
+        if fingerdata != False :
+            finger=str(fingerdata)
+            result=login_yubi(finger)
+            return result
+        #失敗の場合    
+        else:
+            return "指紋認証失敗"    
+    finally:
+        myFP.close()
     
         
 
