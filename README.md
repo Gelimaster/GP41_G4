@@ -29,25 +29,63 @@ APIエンドポイントは以下があります。
    送信必要パラメータ
    user_name #ユーザ名
    email #メールアドレス
-   phone_number* #電話番号
-   fingerprint* #指紋認証
-   faceid* #顔認証
+   phone_number #電話番号
+
+   APIからの返信
+   json式 {
+      status:200/400 #成功(200)か失敗(400)
+      #成功した場合
+      id:XX 
+      username: XXXX #登録されたユーザ名
+      email:XXX@mail.com　#登録されたユーザメールアドレス
+      phone: 090XXXXXXXX　#登録されたユーザ番号
+      #失敗の場合
+      message: 入力エラー　#ユーザの入力ミス
+   }
 
 #指紋認証登録
 /registerfinger
    登録されてるユーザに指紋認証を登録
 
    送信必要パラメータ
-   user_id #ユーザのID
+   user_name #ユーザ名
+   email #メールアドレス
+   phone_number #電話番号
    fingerprint #指紋認証
+
+   APIからの返信
+   json式 {
+      status:200/400 #成功(200)か失敗(400)
+      #成功した場合
+      id:XX 
+      username: XXXX #登録されたユーザ名
+      email:XXX@mail.com　#登録されたユーザメールアドレス
+      phone: 090XXXXXXXX　#登録されたユーザ番号
+      #失敗の場合
+      message: 入力エラー　#ユーザの入力ミス
+   }
 
 #顔認証登録
 /registerface
-   登録されているユーザに顔認証を登録
-   
+   登録されてるユーザに指紋認証を登録
+
    送信必要パラメータ
-   user_id #ユーザID
-   faceid #顔認証
+   user_name #ユーザ名
+   email #メールアドレス
+   phone_number #電話番号
+   faceid #指紋認証
+
+   APIからの返信
+   json式 {
+      status:200/400 #成功(200)か失敗(400)
+      #成功した場合
+      id:XX 
+      username: XXXX #登録されたユーザ名
+      email:XXX@mail.com　#登録されたユーザメールアドレス
+      phone: 090XXXXXXXX　#登録されたユーザ番号
+      #失敗の場合
+      message: 入力エラー　#ユーザの入力ミス
+   }
 
 ************ログイン************
 
@@ -57,6 +95,18 @@ APIエンドポイントは以下があります。
 
    送信必要パラメータ
    fingerprint #指紋認証
+      登録されてるユーザに指紋認証を登録
+   APIからの返信
+   json式 {
+      status:200/400 #成功(200)か失敗(400)
+      #成功した場合
+      id:XX 
+      username: XXXX #登録されたユーザ名
+      email:XXX@mail.com　#登録されたユーザメールアドレス
+      phone: 090XXXXXXXX　#登録されたユーザ番号
+      #失敗の場合
+      message: 入力エラー　#指紋認証に失敗
+   }
 
 #顔認証でログイン
 /loginface
@@ -64,33 +114,21 @@ APIエンドポイントは以下があります。
 
    送信必要パラメータ
    faceid #顔認証 
+   登録されてるユーザに指紋認証を登録
 
-************更新************
-
-/updateuser
-   ユーザの情報を変更したい場合
-
-/updatefinger
-   ユーザの指紋認証データの変更
-
-/updateface
-   ユーザの顔認証データを変更
-
-
-
-
-************削除************
-/deleteuser
-   ユーザを削除する
-/deletefinger
-   ユーザの指紋認証データを削除
-
-/deleteface
-   ユーザの顔認証データを削除
-
-
-*必須ではないパラメータ
+   APIからの返信
+   json式 {
+      status:200/400 #成功(200)か失敗(400)
+      #成功した場合
+      id:XX 
+      username: XXXX #登録されたユーザ名
+      email:XXX@mail.com　#登録されたユーザメールアドレス
+      phone: 090XXXXXXXX　#登録されたユーザ番号
+      #失敗の場合
+      message: 入力エラー　#顔認証失敗
+   }
 ```
+
 
 
 ## プロジェクトを自分のPCにダウンロードの仕方（クローンの仕方）
