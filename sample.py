@@ -39,7 +39,7 @@ elif connection.is_connected() == False:
 face_locations = []
 
 
-#追加箇所カメラ起動し画像をencodeフォルダに保存
+#追加箇所:カメラ起動し画像を保存
 #-------------------------------------------------------------------------------------------------------------------
 
 def save_frame_camera_key(device_num, dir_path, basename, ext='jpg', delay=1, window_name='frame'):
@@ -80,6 +80,30 @@ with open(encode_file,"wb") as f:
     f.write(encode)
 
     target_file=r"encode/encode.txt"
+
+#エンコードしたデータをtestにencode_txtとして格納
+encode_txt = [base64.b64encode(data)]
+
+connection.ping(reconnect=True)
+    # 接続できているかの確認
+if connection.is_connected() == True:
+    print("接続しました。")
+elif connection.is_connected() == False:
+    print("接続できませんでした。")
+
+with connection.cursor() as cursor:
+# データ読み込み
+        sql = ("UPDATE data_table SET data_face=%s WHERE data_id=1;")
+        param = (encode_txt)
+        cursor.execute(sql, param)
+        connection.commit()
+        result = cursor.fetchone()
+        print(result)
+
+# 終了処理
+cursor.close()
+f.close()
+
 #デコードされた画像の保存先パス
 image_file=r"decode.jpg"
 
@@ -101,7 +125,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 #----------------------------------------------------------------------------------------------------------------
-
 
 
 #-------------------------------------------------------------------------------------------------------------------
