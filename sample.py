@@ -238,12 +238,13 @@ face_locations = []
             
 def comparedata(database,faceid):
     # step1 画像読み込みとコンバート
+        path='C:\Users\NHS90324\Downloads\\'+database
 
-        img_elon = face_recognition.load_image_file(database)
-        img_elon = cv2.cvtColor(database, cv2.COLOR_BGR2RGB)
+        img_elon = face_recognition.load_image_file('C:\Users\NHS90324\Downloads\\'+database)
+        img_elon = cv2.cvtColor(img_elon, cv2.COLOR_BGR2RGB)
         
-        img_test = face_recognition.load_image_file(faceid)
-        img_test = cv2.cvtColor(faceid, cv2.COLOR_BGR2RGB)
+        img_test = face_recognition.load_image_file("C:\Users\NHS90324\Downloads\\"+faceid)
+        img_test = cv2.cvtColor(img_test, cv2.COLOR_BGR2RGB)
 
         # step2 顔認証
         face_loc = face_recognition.face_locations(img_elon)[-1]
