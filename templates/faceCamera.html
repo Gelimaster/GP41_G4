@@ -31,13 +31,28 @@
     </div>
   <canvas id="canvas" width="320" height="240"></canvas>
 
+  <img id="imagetag" src="" alt="booo">
+
     <div id="camerabtn">
       <button id="click-photo" onclick="snapshot()" class="btn-sf-like">顔 認 証</button>
     </div>
 
+    <form action = "localhost:8000/faceregister" method = "POST">
+      <input type = "hidden" name = "name" value={{data.username}} />
+      <input type = "hidden" name = "mail" value={{data.email}} />
+      <input type = "hidden" name = "phone" value={{data.phone}} />
+      <input id="image" type="hidden" name="faceid" value="">
+      <div id="camerabtn">
+        <input type="submit" class="btn-sf-like">登録</button>
+      </div>  
+   </form>
+    
+
   </div>
   <script>
+  let imagetag;
   let video = document.querySelector("#videoElement");
+  let send = document.querySelector("#senddata");
   
   let click_button = document.querySelector("#click-photo");
   let canvas = document.querySelector("#canvas");
@@ -54,11 +69,15 @@
 
   click_button.addEventListener('click', function() {
       canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      console.log(canvas.getContext('2d'));
       let image_data_url = canvas.toDataURL('image/jpeg');
+      imagetag = canvas.toDataURL();
+      document.getElementById('imagetag').src= imagetag;
 
       // data url of the image
       console.log(image_data_url);
   });
+  
 
 
 

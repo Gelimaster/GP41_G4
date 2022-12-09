@@ -170,7 +170,7 @@ def register_face(username,email,phone,facedata):
             idint= str(id)
             print(idint)
             print("success id")
-            print("insert fingerdata")
+            print("insert facedata")
             
             #SQL文 指紋認証を登録
             sql = """INSERT INTO data_table(user_id,data_face)VALUES("""+idint+""",'"""+facedata+"""')"""

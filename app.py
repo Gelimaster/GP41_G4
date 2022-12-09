@@ -49,16 +49,27 @@ def register():
         result =register_user(username,email,phone)
         return result  
     
-# 顔認証登録 inprogress....
+# 顔認証登録データ 
 @app.route('/face',methods=["POST","GET"])
 def face_register():
     if request.method == "POST":
         username= request.form["name"]       
         email= request.form["mail"]
         phone=request.form["phone"]
+        data = {'username':username,'email':email,'phone':phone}
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
-    return render_template("faceCamera.html")
+    return render_template("faceCamera.html",data=data)
+#顔認証登録
+@app.route('/faceregister',methods=["POST","GET"])
+def face_connect():
+    if request.method == "POST":
+        username= request.form["name"]       
+        email= request.form["mail"]
+        phone=request.form["phone"]
+        faceid=request.form["faceid"]
+        result =register_face(username,email,phone,faceid)
+        return result
 
         
 
