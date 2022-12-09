@@ -21,6 +21,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
    return render_template("index.html")
+   
+@app.route('/camera')
+def camera():
+   return render_template("camera.html")
 
 # decide if going to register finger or face　DONE
 @app.route('/data',methods=["POST","GET"])

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/faceCamera.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/faceCamera.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
   <title>by-Pus</title>
 </head>
 <body>
@@ -29,16 +29,35 @@
     <div id="cameraFrame">
     </div>
 
+    <div id="container">
+      <video autoplay="true" id="videoElement">
+    
+      </video>
+    </div>
+
     <div id="camerabtn">
       <button class="btn-sf-like">顔 認 証</button>
     </div>
 
   </div>
+  <script>
+  var video = document.querySelector("#videoElement");
+
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        video.srcObject = stream;
+      })
+      .catch(function (err0r) {
+        console.log("Something went wrong!");
+      });
+  }
+  </script>
   <!-- フッター --------------->
   <footer>
     <small>© 2022 by-Pus --NH433--</small>
   </footer>
-  <script>
+  <script    src="{{url_for('static', filename='service-worker.js')}}" >
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js').then(reg => {
         console.log('サービスワーカーを登録しました', reg);
