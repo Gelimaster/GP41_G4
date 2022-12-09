@@ -8,6 +8,7 @@
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
   <title>by-Pus</title>
 </head>
+
 <body>
 
   <!-- ヘッダー --------------->
@@ -25,23 +26,21 @@
   </header>
     <!-- メインコンテンツ --------------->
   <div class="mainDiv">
-
-    <div id="cameraFrame">
-    </div>
-
     <div id="container">
-      <video autoplay="true" id="videoElement">
-    
-      </video>
+      <video autoplay="true" id="videoElement"></video>
     </div>
+  <canvas id="canvas" width="320" height="240"></canvas>
 
     <div id="camerabtn">
-      <button class="btn-sf-like">顔 認 証</button>
+      <button id="click-photo" onclick="snapshot()" class="btn-sf-like">顔 認 証</button>
     </div>
 
   </div>
   <script>
-  var video = document.querySelector("#videoElement");
+  let video = document.querySelector("#videoElement");
+  
+  let click_button = document.querySelector("#click-photo");
+  let canvas = document.querySelector("#canvas");
 
   if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -52,6 +51,20 @@
         console.log("Something went wrong!");
       });
   }
+
+  click_button.addEventListener('click', function() {
+      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      let image_data_url = canvas.toDataURL('image/jpeg');
+
+      // data url of the image
+      console.log(image_data_url);
+  });
+
+
+
+
+
+
   </script>
   <!-- フッター --------------->
   <footer>
