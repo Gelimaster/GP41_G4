@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/faceCamera.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
+  <title>by-Pus</title>
+</head>
+
+<body>
+
+  <!-- ヘッダー --------------->
+  <header>
+    <h1 class="headerLogo"><img src="images/icon-128x128.png" alt="by-Pus ロゴ"></h1>
+
+    <!-- ナビゲーション --------------->
+    <nav>
+      <ul>
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="#">ログイン・新規登録</a></li>
+      </ul>
+    </nav>
+  </header>
+    <!-- メインコンテンツ --------------->
+  <div class="mainDiv">
+    <div id="container">
+      <video autoplay="true" id="videoElement"></video>
+    </div>
+  <canvas id="canvas" width="320" height="240"></canvas>
+
+  <img id="imagetag" src="" alt="booo">
+
+    <div id="camerabtn">
+      <button id="click-photo"  class="btn-sf-like">顔認証</button>
+    </div>
+
+    <form action = "http://localhost:8000/facedata" method = "POST">
+      <input id="image" type="hidden" name="faceid" value="">
+      <div id="camerabtn">
+        <input type="submit" class="btn-sf-like" value="ログイン"></input>
+      </div>  
+   </form>
+    
+
+  </div>
+  <script>
+  let imagetag;
+  let video = document.querySelector("#videoElement");
+  let send = document.querySelector("#senddata");
+  
+  let click_button = document.querySelector("#click-photo");
+  let canvas = document.querySelector("#canvas");
+
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        video.srcObject = stream;
+      })
+      .catch(function (err0r) {
+        console.log("Something went wrong!");
+      });
+  }
+
+  click_button.addEventListener('click', function() {
+      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      console.log(canvas.getContext('2d'));
+      let image_data_url = canvas.toDataURL('image/jpeg');
+      imagetag = canvas.toDataURL();
+      document.getElementById('imagetag').src= imagetag;
+      document.getElementById('image').value=imagetag;
+
+      // data url of the image
+      console.log(image_data_url);
+  });
+  
+
+
+
+
+
+
+  </script>
+  <!-- フッター --------------->
+  <footer>
+    <small>© 2022 by-Pus --NH433--</small>
+  </footer>
+  <script    src="{{url_for('static', filename='service-worker.js')}}" >
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(reg => {
+        console.log('サービスワーカーを登録しました', reg);
+      }).catch(err => {
+        console.log('登録失敗', err);
+      });
+    }
+  </script>
+</body>
+</html>

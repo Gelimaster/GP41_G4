@@ -65,6 +65,8 @@ def face_connect():
         email= request.form["mail"]
         phone=request.form["phone"]
         faceid=request.form["faceid"]
+        face =faceid.encode("ascii")
+        faceid=base64.b64encode(face) 
         result =register_face(username,email,phone,faceid)
         return result
 
@@ -96,10 +98,19 @@ def yubi_register():
         myFP.close()
 
 
-# ログイン顔認証 inprogress....
-@app.route('/loginface')
+# ログイン顔認証 データ 
+@app.route('/loginface',methods=['POST','GET'])
 def login_face():
-    return render_template("index.html")
+    return render_template("facelogin.html")
+
+#ログイン顔認証
+@app.route('/facedata',methods=['POST','GET'])
+def login_faceid():
+     if request.method == "POST":
+        faceid= request.form["faceid"]       
+        result = get_face(faceid)
+        return result
+
 
 #ログインページ done
 @app.route('/login')
