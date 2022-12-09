@@ -8,6 +8,7 @@ import ctypes
 from ctypes import wintypes
 import hashlib
 import os
+import base64
 
 
 SECURITY_MAX_SID_SIZE = 68
@@ -235,20 +236,21 @@ class FingerPrint:
         self.identity.Value.AccountSid.Size = GetLengthSid(token_user.User.Sid)
 
 
-if __name__ == '__main__':
-    sha256 = hashlib.sha256()
+if __name__ == '__main__':        
     myFP = FingerPrint()
     try:
         myFP.open()
-        print("put your finger")
-         #myFP.identify()
-        fingerdata= myFP.identify()
-        if fingerdata != False: 
+         #指情報
+        fingerdata= myFP.identify()  
+        #成功の場合
+        if fingerdata != False :
             finger=str(fingerdata)
-            sha256.update(finger.encode("utf-8"))
-            print(sha256.hexdigest())
+            fingerencode=finger.encode('ascii')
+            finger64=base64.b64encode(fingerencode)
+            fingerdecode64=base64.b64decode(finger64)
+            fingerfinal = fingerdecode64.decode()
+        #失敗の場合    
         else:
-            print("bad finger")             
+            print( "指紋認証失敗" )   
     finally:
         myFP.close()
-        os.system("taskkill /f /im cmd.exe")

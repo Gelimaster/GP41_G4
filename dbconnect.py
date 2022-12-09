@@ -251,7 +251,8 @@ def login_yubi(fingerdata):
         #指紋認証。。。。
         for x in range(row):
             #復号化
-            decoded= result[x][2].decode('ascii')
+            decoded64= result[x][2].decode('ascii')
+            decoded = base64.b64decode(decoded64)
             
             #指紋比較
             if(decoded==fingerdata):

@@ -21,10 +21,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
    return render_template("index.html")
-   
-@app.route('/camera')
-def camera():
-   return render_template("camera.html")
 
 # decide if going to register finger or face　DONE
 @app.route('/data',methods=["POST","GET"])
@@ -49,7 +45,7 @@ def register():
         result =register_user(username,email,phone)
         return result  
     
-# 顔認証登録データ 
+# 顔認証登録データ DONE
 @app.route('/face',methods=["POST","GET"])
 def face_register():
     if request.method == "POST":
@@ -60,7 +56,8 @@ def face_register():
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')
     return render_template("faceCamera.html",data=data)
-#顔認証登録
+
+#顔認証登録　DONE
 @app.route('/faceregister',methods=["POST","GET"])
 def face_connect():
     if request.method == "POST":
