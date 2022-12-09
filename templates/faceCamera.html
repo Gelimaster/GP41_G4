@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/faceCamera.css') }}">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
+  
   <title>by-Pus</title>
 </head>
 
@@ -49,6 +50,7 @@
     
 
   </div>
+  <script src="{{ url_for('static', filename='jquery.js') }}"></script>
   <script>
   let imagetag;
   let video = document.querySelector("#videoElement");
@@ -73,11 +75,14 @@
       let image_data_url = canvas.toDataURL('image/jpeg');
       imagetag = canvas.toDataURL();
       document.getElementById('imagetag').src= imagetag;
-      document.getElementById('image').value=imagetag;
+      document.getElementById('image').value="{{data.username}}.jpeg";
+      const createEl = document.createElement('a');
+      createEl.href = image_data_url;
+      createEl.download = "{{data.username}}";
+      createEl.click();
+      createEl.remove();
+});
 
-      // data url of the image
-      console.log(image_data_url);
-  });
   
 
 

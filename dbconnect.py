@@ -176,9 +176,9 @@ def register_face(username,email,phone,facedata):
             #SQL文 指紋認証を登録
             #print('INSERT INTO data_table(user_id,data_face)VALUES('+idint+','+facedata+')')
             print("2")
-            print(str(facedata,'utf-8'))
+            print(facedata)
             # sql = """INSERT INTO data_table(user_id,data_face)VALUES("""+idint+""",\""""+facedata+"""\")"""
-            sql = """INSERT INTO data_table(user_id)VALUES("""+idint+""",\'"""+str(facedata,'utf-8')+"""\')"""
+            sql = """INSERT INTO data_table(user_id,data_face)VALUES("""+idint+""",'"""+facedata+"""')"""
             print("3")
             print("executing query")
             print(sql) 

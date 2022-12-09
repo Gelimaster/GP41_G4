@@ -1,4 +1,4 @@
-from flask import Flask, request ,render_template, redirect
+from flask import Flask, request ,render_template, redirect,flash,  url_for
 import base64
 from scanfinger import *
 from opencmd import *
@@ -57,6 +57,16 @@ def face_register():
     #text = request.args.get('text', '')
     return render_template("faceCamera.html",data=data)
 
+# #顔のデータをfacesaveフォルダに保存
+# @app.route('/saveface',methods=["POST","GET"])
+# def save_face():
+#     if request.method == "POST":
+#         name= request.form["name"]
+#         imagefile= request.files[name]
+#         imagefile.save(os.path.join(UPLOAD_FOLDER, "test.jpeg"))
+#         return "done"
+
+
 #顔認証登録　DONE
 @app.route('/faceregister',methods=["POST","GET"])
 def face_connect():
@@ -65,8 +75,6 @@ def face_connect():
         email= request.form["mail"]
         phone=request.form["phone"]
         faceid=request.form["faceid"]
-        face =faceid.encode("ascii")
-        faceid=base64.b64encode(face) 
         result =register_face(username,email,phone,faceid)
         return result
 
