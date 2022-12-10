@@ -70,7 +70,12 @@
       let image_data_url = canvas.toDataURL('image/jpeg');
       imagetag = canvas.toDataURL();
       document.getElementById('imagetag').src= imagetag;
-      document.getElementById('image').value=imagetag;
+      document.getElementById('image').value="loginface.jpeg";
+      const createEl = document.createElement('a');
+      createEl.href = image_data_url;
+      createEl.download = "loginface";
+      createEl.click();
+      createEl.remove();
 
       // data url of the image
       console.log(image_data_url);
