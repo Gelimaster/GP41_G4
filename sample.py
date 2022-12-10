@@ -9,6 +9,7 @@ import glob
 import mysql.connector
 from mysql.connector import Error
 import os
+from os import listdir
 
 # connection = mysql.connector.connect(host='localhost',
 #                                          database='face',
@@ -238,12 +239,32 @@ face_locations = []
             
 def comparedata(database,faceid):
     # step1 画像読み込みとコンバート
-        path='C:\Users\NHS90324\Downloads\\'+database
+        print("start comparing datas")
+        # get the path/directory
+        print("get path to image")
+        folder_dir = "C:/Users/nhs90629/Documents/GitHub/GP41_G4/login_picture/"
+        print(folder_dir)
+        img_elon=""
+        img_test=""
+        for images in os.listdir(folder_dir):
+            # get user data images
+            if (images.endswith("face.jfif")):
+                print("found data")
+                img_elon = face_recognition.load_image_file(images) 
+                img_test = face_recognition.load_image_file(images) 
+                print(img_test)
+                print(img_elon) 
+                      
+            # get login image
+            if (images.endswith("face.jfif")):
+                print("found login image")
+                img_test = face_recognition.load_image_file(images)        
 
-        img_elon = face_recognition.load_image_file('C:\Users\NHS90324\Downloads\\'+database)
+        # img_elon = face_recognition.load_image_file("\login_picture\\"+database)
+        print("set ctvcolors")
         img_elon = cv2.cvtColor(img_elon, cv2.COLOR_BGR2RGB)
         
-        img_test = face_recognition.load_image_file("C:\Users\NHS90324\Downloads\\"+faceid)
+        # img_test = face_recognition.load_image_file("\login_picture\\"+faceid)
         img_test = cv2.cvtColor(img_test, cv2.COLOR_BGR2RGB)
 
         # step2 顔認証
