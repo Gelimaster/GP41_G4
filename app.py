@@ -30,7 +30,7 @@ def aaa():
         email= request.form["mail"]
         phone=request.form["phone"]
         data = {'username':username,'email':email,'phone':phone}
-        return render_template("fingerface.html",data=data)
+        return render_template("choiceBio.html",data=data)
 
     # textで指定されたパラメータをJsonに整形して返す
     #text = request.args.get('text', '')

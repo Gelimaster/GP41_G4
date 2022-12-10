@@ -1,0 +1,233 @@
+/* choiceBio.html, touchScan.html */
+
+/* all */
+.createMsg{
+  position: relative;
+  width: 100%;
+  padding: 2% 0 0 0;
+  /* background-color: #ddd; */
+}
+.createMsg p{
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+div.createDiv {
+	display: flex;
+  margin: 3% 0px 10px;
+	justify-content: center;
+  /* text-align: center; */
+}
+
+div#createFrame {
+	/* left: 36%; */
+  /* margin: 10px 0 30px 37%; */
+  width: 700px;
+  height: 470px;
+  background-color: #eee;
+}
+
+
+/* --form--- */
+.form-style-2{
+	/* max-width: 500px; */
+	max-width: 700px;
+	padding: 20px 12px 10px 20px;
+	font: 13px Arial, Helvetica, sans-serif;
+}
+.form-style-2-heading{
+	font-weight: bold;
+	font-style: italic;
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 20px;
+	font-size: 15px;
+	padding-bottom: 3px;
+}
+.form-style-2 label{
+	display: block;
+	/* margin: 0px 0px 15px 0px; */
+}
+.form-style-2 label > span{
+	width: 100px;
+	font-weight: bold;
+	float: left;
+	padding-top: 8px;
+	padding-right: 5px;
+}
+
+/* -------form input[type=submit]---------- */
+
+
+.form-style-2 input[type=submit],
+.form-style-2 input[type=button]{
+	border: none;
+	padding: 8px 15px 8px 15px;
+	background: #45b756;
+	/* background: #00D32E; */
+	color: #fff;
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+.form-style-2 input[type=submit]:hover,
+.form-style-2 input[type=button]:hover{
+	/* background: #EA7B00; */
+	background: #00af26;
+	color: #fff;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* #89b56b,#3f6844,#5daa68 */
+/* #00ee93 */
+
+
+/* choiceBio.html */
+div.faceForm{
+	position: relative;
+	float: left;
+	left: 20%;
+}
+div.touchForm{
+	position: relative;
+	float: right;
+	right: 22%;
+}
+
+
+div.choiceDiv{
+  text-align: center;
+}
+div.choiceDiv img.imgChoice{
+  width: 144px;
+}
+
+a.faceTouch, button.faceTouch{
+  margin: 2% 3% 0 3%;
+  border: none;
+}
+a.faceTouch:hover, button.faceTouch:hover{
+  opacity: 0.7;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+p.choiceMsg{
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  width: 110px;
+}
+/* p#faceMsg{
+  right: 3%;
+}
+p#touchMsg{
+  left: 5%;
+} */
+
+/* div.submitDiv{
+	width: 40%;
+  text-align: center;
+} */
+
+label.submitBtn{
+	/* padding: 0% 30% 0 0; */
+  padding-bottom: 10px;
+	width: 16%;
+  position: relative;
+  left: 40%;
+  text-align: center;
+	margin-bottom: 0;
+}
+
+
+/* touchScan.html */
+div.touchMsg{
+  /* position: relative; */
+  width: 100%;
+  padding: 0% 0 0 0;
+}
+div.touchMsg p{
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+div#touchFrame {
+  /* margin: 10px 0 30px 27%; */
+  left: 27%;
+  width: 700px;
+  height: 400px;
+  text-align: center;
+  /* background-color: #aaa; */
+}
+p.touchDevice{
+  margin-top: 10%;
+	font-weight: bold;
+	font-style: italic;
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 20px;
+	font-size: 15px;
+	padding-bottom: 3px;
+}
+
+div#touchBtn {
+  margin: 25% 15px 15px 15px;
+  /* width: 100%; */
+  text-align: center;
+}
+#touchBtn input[type=submit],
+#touchBtn input[type=button]{
+	border: none;
+	padding: 8px 15px 8px 15px;
+	background: #45b756;
+	/* background: #00D32E; */
+	color: #fff;
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+#touchBtn input[type=submit]:hover,
+#touchBtn input[type=button]:hover{
+	/* background: #EA7B00; */
+	background: #00af26;
+	color: #fff;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* faceToTouch.html */
+p#touchMsg2{
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  width: 110px;
+	margin: 0.5% 0 5% 0;
+  left: 0%;
+}
+
+/* touchToFace.html */
+p#faceMsg2{
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  width: 110px;
+	margin: 0.5% 0 5% 0;
+  left: 0%;
+}
+
+
