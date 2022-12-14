@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GP41 433</title>
+  </head>
+  <body>
+    <h1>testing</h1>
+    <form action = "http://localhost:8000/data" method = "POST">
+      <p>Name <input type = "text" name = "name" /></p>
+      <p>mail <input type = "text" name = "mail" /></p>
+      <p>phone <input type = "text" name = "phone" /></p>
+      <p><input type = "submit" value = "next" /></p>
+   </form>
+    <button onclick="openew2()">finger login</button>
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    
+    function openew2(){
+      url = "http://localhost:8000/yubi";
+      window.open(url);
+    }
+  </script>
+  </body>
+</html>

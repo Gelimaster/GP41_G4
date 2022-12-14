@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GP41 433</title>
+  </head>
+  <body>
+    <h1>testing</h1>
+    <form action = "http://localhost:8000/loginfinger" method = "POST">
+      <p><input type = "submit" value = "指紋認証でログイン" /></p>
+   </form>
+   <form action = "http://localhost:8000/loginface" method = "POST">
+    <p><input type = "submit" value = "顔認証でログイン" /></p>
+ </form>
+    
+
+  <script type="text/javascript">
+    
+    function openew2(){
+      url = "http://localhost:8000/yubi";
+      window.open(url);
+    }
+  </script>
+  </body>
+</html>

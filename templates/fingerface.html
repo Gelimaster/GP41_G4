@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指紋認証か顔認証</title>
+</head>
+<body>
+    <form action = "http://localhost:8000/yubi" method = "POST">
+        <input type = "hidden" name = "name" value={{data.username}} />
+        <input type = "hidden" name = "mail" value={{data.email}} />
+        <input type = "hidden" name = "phone" value={{data.phone}} />
+        <p><input type = "submit" value = "指紋認証" />
+     </form>
+     <form action = "http://localhost:8000/face" method = "POST">
+        <input type = "hidden" name = "name" value={{data.username}} />
+        <input type = "hidden" name = "mail" value={{data.email}} />
+        <input type = "hidden" name = "phone" value={{data.phone}} />
+        <p><input type = "submit" value = "顔認証" />
+     </form>
+     
+</body>
+</html>

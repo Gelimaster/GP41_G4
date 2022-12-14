@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <title>顔認証</title>
+</head>
+<body>
+
+  <header>
+    <div id="cd-logo"><a href="#0"><img src="static/icon-96x96.png" alt="Logo"></a></div>
+    <nav class="main-nav">
+      <ul>
+        <!-- inser more links here -->
+        <li><a href="sample.html">TOP</a></li>
+        <li><a href="#">問い合わせ</a></li>
+        <li><a id="loginBtn"  class="cd-signin" href="#0">ログイン・新規登録</a></li>
+        <!-- <li><a class="cd-signup" href="#0">Sign up</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ログイン・新規登録モーダルウィンドウ -->
+  <div id="easyModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>ログイン</h2>
+        <span class="modalClose">×</span>
+      </div>
+      <div class="modal-body">
+        <div id="loginBio">
+          <a href="faceCamera_login.html" class="loginBioA" id="loginFace"><img class="imgIcon" src="images/face-48.svg" /></a>
+          <a href="touchScan_login.html" class="loginBioA" id="loginTouch"><img class="imgIcon" src="images/icons8-touch-id_black.svg" /></a>
+          <a href="newUser.html" class="newAccount">新規登録はこちら</a>
+        </div>
+        <div class="right">
+          <div class="connect">
+            <p>Connect with</p>
+          </div>
+          <a href="" class="facebook">
+          <!--       <span class="fontawesome-facebook"></span> -->
+            <i class="fab fa-facebook fa-lg" aria-hidden="true"><p class="accountBtn">For Facebook Account</p></i>
+          </a> <br />
+          <a href="" class="twitter">
+          <!--       <span class="fontawesome-twitter"></span> -->
+            <i class="fab fa-twitter fa-lg" aria-hidden="true"><p class="accountBtn">For Twitter Account</p></i>
+          </a> <br />
+          <a href="" class="google-plus">
+          <!--       <span class="fontawesome-google-plus"></span> -->
+            <i class="fab fa-google-plus fa-lg" aria-hidden="true"><p class="accountBtn">For Google Account</p></i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ここまで -->
+
+
+  <!-- メインコンテンツ --------------->
+  <div class="mainDiv">
+    <div class="subDiv">
+      <div class="cameraMsg">
+        <p>顔認証</p>
+      </div>
+      <div id="container">
+        <video autoplay="true" id="videoElement"></video>
+        <canvas id="canvas" width="640" height="480"></canvas>
+      </div>
+    
+    <div id="cameraBtn">
+      <button id="click-photo"  class="btn-sf-like">顔 認 証</button>
+      <form action = "http://localhost:8000/faceregister" method = "POST">
+        <input type = "hidden" name = "name" value={{data.username}} />
+        <input type = "hidden" name = "mail" value={{data.email}} />
+        <input type = "hidden" name = "phone" value={{data.phone}} />
+        <input id="image" type="hidden" name="faceid" value="">
+        <div id="cameraBtn">
+          <input type="submit" class="btn-sf-like" value="登録"></input>
+        </div>  
+     </form>
+    </div>
+   </div>
+  </div>
+  <script>
+    let imagetag;
+    let video = document.querySelector("#videoElement");
+    let send = document.querySelector("#senddata");
+    
+    let click_button = document.querySelector("#click-photo");
+    let canvas = document.querySelector("#canvas");
+  
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    }
+  
+    click_button.addEventListener('click', function() {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        console.log(canvas.getContext('2d'));
+        let image_data_url = canvas.toDataURL('image/jpeg');
+        imagetag = canvas.toDataURL();
+        document.getElementById('image').value="{{data.username}}.jpeg";
+        const createEl = document.createElement('a');
+        createEl.href = image_data_url;
+        createEl.download = "{{data.username}}";
+        createEl.click();
+        createEl.remove();
+  });
+    </script>
+  <!-- フッター --------------->
+  <footer>
+    <small>&copy; 2022 by-Pus --NH433--</small>
+    <br />
+    <small class="licenceMsg">
+      <a target="_blank" href="https://icons8.com/icon/quJUFLsvXCrf/touch-id">
+        Touch ID
+      </a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+    </small>
+  </footer>
+
+  <script src="{{url_for('static', filename='main.js')}}"></script>
+  <script src="{{url_for('static', filename='check.js')}}"></script>
+</body>
+</html>
