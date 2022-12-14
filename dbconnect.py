@@ -1,6 +1,6 @@
 import mysql.connector
 import base64
-# from sample import *
+from sample import *
 cursor=""
 conn=""
 ###########################################################################登録###########################################################################
@@ -82,7 +82,7 @@ def register_yubi(username,email,phone,fingerdata):
             print(idint)
             print("success id")
             print("insert fingerdata")
-            
+            print(fingerdata)
             #SQL文 指紋認証を登録
             sql = """INSERT INTO data_table(user_id,data_finger)VALUES("""+idint+""",'"""+fingerdata+"""')"""
             print("executing query")
@@ -258,8 +258,8 @@ def login_yubi(fingerdata):
         #指紋認証。。。。
         for x in range(row):
             #復号化
-            decoded64= result[x][2].decode('ascii')
-            decoded = base64.b64decode(decoded64)
+            decoded= result[x][2]
+
             
             #指紋比較
             if(decoded==fingerdata):
@@ -302,8 +302,9 @@ def get_face(facedata):
             #ここで画像がループしてるぜ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
             decoded= result[x][2]
             print(decoded)
-            result = comparedata(decoded,facedata)
-            print(result)
+            print(facedata)
+            result =comparedata(decoded,facedata)
+            print("result is here :",result)
             #指紋比較
             if(result):
                 #一致した場合

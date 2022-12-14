@@ -95,9 +95,7 @@ def yubi_register():
         #成功の場合
         if fingerdata != False :
             finger=str(fingerdata)
-            fingerdata= finger.encode('ascii')
-            finger64=base64.b64encode(fingerdata)
-            result=register_yubi(username,email,phone,finger64)
+            result=register_yubi(username,email,phone,finger)
             return result
         #失敗の場合    
         else:
