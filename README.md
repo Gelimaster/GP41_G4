@@ -144,39 +144,10 @@ cd C:\Users\NHS90324\AndroidStudioProjects
 移動出来たら次のコマンドを実行する（githubをインストールしてないとできません）
 
 ```bash
- git clone https://github.com/tanakaho/IH4C_G3_android.git
+ git clone https://github.com/Gelimaster/GP41_G4.git
 ```
 これでインストールが開始されます。
 インストール・更新はコマンドプロンプトかVSで行う必要があります（VSの場合は簡単にできます）
-
-
-
-
-
-
-
-## GitHub 使い方
-
-# GP41_G4
-
-## プロジェクトを自分のPCにダウンロードの仕方（クローンの仕方）
-
-まずはVisual Studioのターミナルかコマンドプロンプトを開きクローンしたいフォルダまで移動します。
-
-```bash
-例：
-PC/ユーザー/AndroidStudioProjects
-cd C:\Users\NHS90324\AndroidStudioProjects
-```
-
-移動出来たら次のコマンドを実行する（githubをインストールしてないとできません）
-
-```bash
- git clone https://github.com/Gelimaster/.git
-```
-これでインストールが開始されます。
-インストール・更新はコマンドプロンプトかVSで行う必要があります（VSの場合は簡単にできます）
-
 
 
 
