@@ -137,8 +137,8 @@ APIエンドポイントは以下があります。
 
 ```bash
 例：
-PC/ユーザー/AndroidStudioProjects
-cd C:\Users\NHS90324\AndroidStudioProjects
+PC/ユーザー/ダウンロード先ファイル
+cd C:\Users\ダウンロード先ファイル
 ```
 
 移動出来たら次のコマンドを実行する（githubをインストールしてないとできません）
@@ -146,9 +146,6 @@ cd C:\Users\NHS90324\AndroidStudioProjects
 ```bash
  git clone https://github.com/Gelimaster/GP41_G4.git
 ```
-これでインストールが開始されます。
-インストール・更新はコマンドプロンプトかVSで行う必要があります（VSの場合は簡単にできます）
-
-
+これでインストールができます。
 
 
