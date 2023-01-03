@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/choiceBio.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <title>顔認証</title>
+  <title>登録完了</title>
 </head>
 <body>
 
@@ -33,8 +34,8 @@
       </div>
       <div class="modal-body">
         <div id="loginBio">
-          <a href="faceCamera_login.html" class="loginBioA" id="loginFace"><img class="imgIcon" src="images/face-48.svg" /></a>
-          <a href="touchScan_login.html" class="loginBioA" id="loginTouch"><img class="imgIcon" src="images/icons8-touch-id_black.svg" /></a>
+          <a href="faceCamera_login.html" class="loginBioA" id="loginFace"><img class="imgIcon" src="static/face-48.svg" /></a>
+          <a href="touchScan_login.html" class="loginBioA" id="loginTouch"><img class="imgIcon" src="static/icons8-touch-id_black.svg" /></a>
           <a href="newUser.html" class="newAccount">新規登録はこちら</a>
         </div>
         <div class="right">
@@ -64,56 +65,26 @@
   <!-- メインコンテンツ --------------->
   <div class="mainDiv">
     <div class="subDiv">
-      <div class="cameraMsg">
-        <p>顔認証</p>
+      <div class="touchMsg">
+        <p>登録完了しました</p>
       </div>
-      <div id="container">
-        <video autoplay="true" width="320" height="240" id="videoElement"></video>
-        <canvas id="canvas" width="320" height="240"></canvas>
+      <div id="touchFrame">
+        <!-- <p class="touchDevice">認証デバイスに指を当ててください</p> -->
+
+        <div id="touchBtn">
+          <form action="sample.html" method="post">
+            <input class="btn-sf-like" type="submit" value="TOPへ" />
+            <!-- <div class="returnBtn">
+              <a href="sample.html"><input type="button" name="#" value="TOPへ" /></a>
+            </div> -->
+          </form>
+        </div>
       </div>
-    
-    <div id="cameraBtn">
-      <button id="click-photo"  class="btn-sf-like">顔 認 証</button>
-      <form action = "http://localhost:8000/facedata" method = "POST">
-        <input id="image" type="hidden" name="faceid" value="">
-        <div id="cameraBtn">
-          <input type="submit" class="btn-sf-like" value="ログイン"></input>
-        </div>  
-     </form>
+
     </div>
-   </div>
   </div>
-  <script>
-    let imagetag;
-    let video = document.querySelector("#videoElement");
-    let send = document.querySelector("#senddata");
-    
-    let click_button = document.querySelector("#click-photo");
-    let canvas = document.querySelector("#canvas");
-  
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
-    }
-  
-    click_button.addEventListener('click', function() {
-      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-      console.log(canvas.getContext('2d'));
-      let image_data_url = canvas.toDataURL('image/jpeg');
-      imagetag = canvas.toDataURL();
-      document.getElementById('image').value="loginface.jpeg";
-      const createEl = document.createElement('a');
-      createEl.href = image_data_url;
-      createEl.download = "loginface";
-      createEl.click();
-      createEl.remove();
-  });
-    </script>
+
+
   <!-- フッター --------------->
   <footer>
     <small>&copy; 2022 by-Pus --NH433--</small>

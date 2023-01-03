@@ -76,7 +76,7 @@ def face_connect():
         phone=request.form["phone"]
         faceid=request.form["faceid"]
         result =register_face(username,email,phone,faceid)
-        return result
+        return render_template("success.html",data=result)
 
         
 
@@ -96,7 +96,7 @@ def yubi_register():
         if fingerdata != False :
             finger=str(fingerdata)
             result=register_yubi(username,email,phone,finger)
-            return result
+            return render_template("success.html")
         #失敗の場合    
         else:
             return "指紋認証失敗"    
@@ -115,7 +115,7 @@ def login_faceid():
      if request.method == "POST":
         faceid= request.form["faceid"]       
         result = get_face(faceid)
-        return result
+        return render_template("success1.html",data=result)
 
 
 #ログインページ done
@@ -135,7 +135,7 @@ def login_finger():
         if fingerdata != False :
             finger=str(fingerdata)
             result=login_yubi(finger)
-            return result
+            return render_template("success1.html",data=result)
         #失敗の場合    
         else:
             return "指紋認証失敗"    
