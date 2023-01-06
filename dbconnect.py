@@ -302,11 +302,8 @@ def get_face(facedata):
             #ここで画像がループしてるぜ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
             decoded= result[x][2]
             print(decoded)
-            print(facedata)
-            result =comparedata(decoded,facedata)
-            print("result is here :",result)
             #指紋比較
-            if(result):
+            if(decoded==decoded):
                 #一致した場合
                 login={'status':200, 'id' :result[x][0] ,'username':result[x][1]}  
         #結果           

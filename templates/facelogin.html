@@ -16,7 +16,7 @@
     <nav class="main-nav">
       <ul>
         <!-- inser more links here -->
-        <li><a href="sample.html">TOP</a></li>
+        <li><a href="C:\Users\NHS90324\Desktop\by-Pus\sample.html">TOP</a></li>
         <li><a href="#">問い合わせ</a></li>
         <li><a id="loginBtn"  class="cd-signin" href="#0">ログイン・新規登録</a></li>
         <!-- <li><a class="cd-signup" href="#0">Sign up</a></li> -->
@@ -33,9 +33,9 @@
       </div>
       <div class="modal-body">
         <div id="loginBio">
-          <a href="faceCamera_login.html" class="loginBioA" id="loginFace"><img class="imgIcon" src="images/face-48.svg" /></a>
-          <a href="touchScan_login.html" class="loginBioA" id="loginTouch"><img class="imgIcon" src="images/icons8-touch-id_black.svg" /></a>
-          <a href="newUser.html" class="newAccount">新規登録はこちら</a>
+          <a href="/loginface" class="loginBioA" id="loginFace"><img class="imgIcon" src="static/face-48.svg" /></a>
+          <a href="/loginfinger" class="loginBioA" id="loginTouch"><img class="imgIcon" src="static/icons8-touch-id_black.svg" /></a>
+          <a href="C:sers\NHS90324\Desktop\by-Pus\newUser.html" class="newAccount">新規登録はこちら</a>
         </div>
         <div class="right">
           <div class="connect">
@@ -68,8 +68,8 @@
         <p>顔認証</p>
       </div>
       <div id="container">
-        <video autoplay="true" id="videoElement"></video>
-        <canvas id="canvas" width="640" height="480"></canvas>
+        <video autoplay="true" width="320" height="240" id="videoElement"></video>
+        <canvas id="canvas" width="320" height="240"></canvas>
       </div>
     
     <div id="cameraBtn">
@@ -77,7 +77,7 @@
       <form action = "http://localhost:8000/facedata" method = "POST">
         <input id="image" type="hidden" name="faceid" value="">
         <div id="cameraBtn">
-          <input type="submit" class="btn-sf-like" value="登録"></input>
+          <input type="submit" class="btn-sf-like" value="ログイン"></input>
         </div>  
      </form>
     </div>
