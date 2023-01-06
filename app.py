@@ -17,10 +17,7 @@ app = Flask(__name__)
 #以下のリンクで詳細がわかる
 # https://docs.python.org/ja/3/library/hashlib.html
 
-#main page  DONE
-@app.route('/')
-def index():
-   return render_template("index.html")
+
 
 # decide if going to register finger or face　DONE
 @app.route('/data',methods=["POST","GET"])
@@ -117,11 +114,6 @@ def login_faceid():
         result = get_face(faceid)
         return render_template("success1.html",data=result)
 
-
-#ログインページ done
-@app.route('/login')
-def login():
-    return render_template("login.html")
     
 # ログイン指紋認証 done
 @app.route('/loginfinger',methods=['POST','GET'])
