@@ -18,6 +18,11 @@ app = Flask(__name__)
 # https://docs.python.org/ja/3/library/hashlib.html
 
 
+@app.route('/',methods=["POST","GET"])
+def index():
+    return render_template("sample.html")
+
+
 
 # decide if going to register finger or face　DONE
 @app.route('/data',methods=["POST","GET"])
