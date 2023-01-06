@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/normalize.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/choiceBio.css') }}">
   <title>by-Pus Sample</title>
 </head>
 <body>
   <header>
-    <div id="cd-logo"><a href="#0"><img src="images/icon-96x96.png" alt="Logo"></a></div>
+    <div id="cd-logo"><a href="#0"><img src="static/icon-96x96.png" alt="Logo"></a></div>
     <nav class="main-nav">
       <ul>
         <!-- inser more links here -->
@@ -39,8 +39,8 @@
       </div>
       <div class="modal-body">
         <div id="loginBio">
-          <a href="http://localhost:8000/loginface" class="loginBioA" id="loginFace"><img class="imgIcon" src="images/face-48.svg" /></a>
-          <a href="http://localhost:8000/loginfinger" class="loginBioA" id="loginTouch"><img class="imgIcon" src="images/icons8-touch-id_black.svg" /></a>
+          <a href="http://localhost:8000/loginface" class="loginBioA" id="loginFace"><img class="imgIcon" src="static/face-48.svg" /></a>
+          <a href="http://localhost:8000/loginfinger" class="loginBioA" id="loginTouch"><img class="imgIcon" src="static/icons8-touch-id_black.svg" /></a>
           <a href="newUser.html" class="newAccount">新規登録はこちら</a>
         </div>
         <div class="right">
@@ -79,6 +79,7 @@
 
   </footer>
 
-  <script src="js/main.js"></script>
+
+  <script src="{{url_for('static', filename='main.js')}}"></script>
 </body>
 </html>
